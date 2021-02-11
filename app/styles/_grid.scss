@@ -1,0 +1,82 @@
+$mar: 15px;
+$items: 12;
+$container: 1600px;
+
+// breakpoints map
+$breakpoints: (
+        xs: 568px,
+        sm: 768px,
+        md: 992px,
+        lg: 1200px
+);
+
+$container-width: (
+        540px,
+        720px,
+        960px,
+        $container,
+);
+
+@media (min-width: 568px) {
+  .container{
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container{
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container{
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container{
+    max-width: $container;
+  }
+}
+
+// media query mixin
+@mixin break($size) {
+  @media (min-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+
+// grid container
+
+.container{
+  padding: 0 $mar;
+  margin: 0 auto;
+}
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: -$mar;
+  margin-right: -$mar;
+}
+
+// grid item
+[class^="col-"] {
+  flex: 0 0 100%;
+  padding-left: $mar;
+  padding-right: $mar;
+}
+
+// loop over the breakpoints
+@each $key, $value in $breakpoints {
+  @for $i from 1 through $items {
+    .col-#{$key}-#{$i} {
+      @include break($key) {
+        flex: 0 0 #{$i / $items * 100%};
+        padding-left: $mar;
+        padding-right: $mar;
+      }
+    }
+  }
+}
