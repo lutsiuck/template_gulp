@@ -1,9 +1,9 @@
-gulp version 4.0.2
+## Quick start
 
-npm init
+`npm i` - Installs everything needed
 
-run server project
-gulp serve
+`gulp serve` - Runs the server and watch for file changes in src folder. *localhost:8000*
 
-run build project
-gulp build
+`gulp build`- Creates dist folder ready to deploy it
+
+> Note: gulp version 4.0.2
